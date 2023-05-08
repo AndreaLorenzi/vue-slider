@@ -11,32 +11,37 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-	<div class="container">
-		<div class="carousel"> 
-			
-                    <img
-                    v-for="(item, index) in arrImages"
-                    :key="item"
-                    :src="item.image"
-                    :alt="">
-                    <h2 class="title"></h2>
-                    <p class="text"></p>
-                </div>
-
-			<!-- div con le miniature -->
-			<div class="thumbs">
-				<div class="controls">
-					<i class="bi bi-arrow-up-circle-fill btn btn-prev"></i>
-					<i class="bi bi-arrow-down-circle-fill btn btn-next"></i>
+	<div id="app">
+		<div class="container">
+			<div class="carousel" @mouseover="mouseOver" @mouseleave="mouseLeave">
+				<div class="highlighted">
+					<img 
+					v-for="(image, index) in arrImages" 
+					:src="image"
+					:key="image"
+					:class="{active: index == activeIndex}"
+					>
+					<div class="text-highlighted"></div>
 				</div>
-				<!-- <img src="img/01.jpg" alt="" class="active">
-				<img src="img/02.jpg" alt="">
-				<img src="img/03.jpg" alt="">
-				<img src="img/04.jpg" alt="">
-				<img src="img/05.jpg" alt=""> -->
-			</div>           
+				<!-- div con le miniature -->
+				<div class="thumbs">
+					<div class="controls">
+						<i class="bi bi-arrow-up-circle-fill btn btn-prev" @click="prev"></i>
+						<i class="bi bi-arrow-down-circle-fill btn btn-next" @click="next"></i>
+					</div>
+					<img 
+					v-for="(image, index) in arrImages" 
+					:src="image"
+					:key="image"
+					alt=""
+					:class="{active: index == activeIndex}"
+					@click="selected(index)"
+					>
+				</div>
+			</div>
 		</div>
-	</div> <button class="inverso"> reverse </button>
+	</div>
+	
 
 
 </body>
